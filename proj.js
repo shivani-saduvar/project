@@ -57,7 +57,7 @@ app.post('/searchventilatorbystatus',(req,res) =>{
 
 //updating ventilator details 
 app.put('/updateventilatordetails',(req,res) =>{
-    var ventid = { ventilatorId: req.body.ventilatorId };
+    var ventid = { ventilatorid: req.body.ventilatorid };
     console.log(ventid);
     var newvalues = { $set: { status: req.body.status } };
     db.collection('ventilatordetails').updateOne(ventid, newvalues,function (err, result){
@@ -68,14 +68,14 @@ app.put('/updateventilatordetails',(req,res) =>{
 
 //add ventilator
 app.put('/addventilatorbyuser', (req,res) => {
-    var hId= req.body.hId;
-    var ventilatorId=req.body.ventilatorId;
+    var hid= req.body.hid;
+    var ventilatorid=req.body.ventilatorid;
     var status=req.body.status;
     var name=req.body.name;
 
     var item=
     {
-        hId:hId, ventilatorId:ventilatorId, status:status, name:name
+        hid:hid, ventilatorid:ventilatorid, status:status, name:name
     };
     db.collection('ventilatordetails').insertOne(item, function (err, result){
         res.json('new item inserted');
@@ -84,10 +84,10 @@ app.put('/addventilatorbyuser', (req,res) => {
 
 //delete ventilator by ventilatorid
 app.delete('/delete',(req,res) => {
-    var myquery = req.query.ventilatorId;
+    var myquery = req.query.ventilatorid;
     console.log(myquery);
 
-    var myquery1 = { ventilatorId: myquery };
+    var myquery1 = { ventilatorid: myquery };
     db.collection('ventilatordetails').deleteOne(myquery1,function (err,obj)
     {
         if(err) throw err;
